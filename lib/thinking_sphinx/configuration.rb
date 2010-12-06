@@ -264,7 +264,7 @@ module ThinkingSphinx
       path = "#{app_root}/config/sphinx.yml"
       return unless File.exists?(path)
 
-      conf = YAML::load(ERB.new(IO.read(path)).result)[environment]
+      conf = YAML::load(ERB.new(IO.read(path)).result(binding))[environment]
 
       conf.each do |key,value|
         self.send("#{key}=", value) if self.respond_to?("#{key}=")
